@@ -1,0 +1,1 @@
+"vo.france-asia.org" "cclcgvomsli01.in2p3.fr" "15019" "/O=GRID-FR/C=FR/O=CNRS/OU=CC-IN2P3/CN=cclcgvomsli01.in2p3.fr" "vo.france-asia.org"
