@@ -47,4 +47,5 @@ else
     print_both "$repo: up to date."
 fi
 print_both "End."
+
 exit 0
