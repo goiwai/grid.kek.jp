@@ -11,6 +11,19 @@ repo=grid.kek.jp
 cvmfs_dir=/cvmfs/$repo
 git_dir=$cvmfs_dir
 
+function print_both() {
+    local msg="$script_name[$(date '+%Y-%m-%d %H:%M:%S')]: \"$*\""
+    echo "$msg" >&1
+    echo "$msg" >&2
+}
+
+function echo_eval() {
+    local cmd="$*"
+    print_both "$cmd"
+    eval $cmd
+    return $?
+}
+
 function out_of_date() {
     cd $git_dir
     git remote show origin | tail -n 1 | grep -q 'out of date'
@@ -23,34 +36,15 @@ function up_to_date() {
     return $?
 }
 
-dtstr=$(date)
-echo $dtstr >&1
-echo $dtstr >&2
-
+print_both "Begin."
 if $(out_of_date); then
-    cmd="cvmfs_server transaction $repo"
-    echo $cmd
-    eval $cmd
-
-    cd $git_dir
-
-    cmd="git pull"
-    echo $cmd
-    eval $cmd
-
-    cd $HOME
-
-    cmd="cvmfs_server publish $repo"
-    echo $cmd
-    eval $cmd
+    echo_eval "cvmfs_server transaction $repo"
+    echo_eval "cd $git_dir"
+    echo_eval "git pull"
+    echo_eval "cd $HOME"
+    echo_eval "cvmfs_server publish $repo"
 else
-    echo "$repo: up to date."
+    print_both "$repo: up to date."
 fi
-
-dtstr=$(date)
-echo $dtstr >&1
-echo $dtstr >&2
-echo "End." >&1
-echo "End." >&2
-
+print_both "End."
 exit 0
