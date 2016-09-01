@@ -36,6 +36,17 @@ function up_to_date() {
     return $?
 }
 
+# first check
+echo_eval "cvmfs_server transaction $repo"
+if test $? -ne 0; then
+    # Repository grid.kek.jp is already in a transaction
+    print_both "Leave the state of transaction first:"
+    print_both "cvmfs_server transaction $repo"
+    exit 1
+else
+    echo_eval "cvmfs_server abort -f $repo"
+fi
+
 print_both "Begin."
 if $(out_of_date); then
     echo_eval "cvmfs_server transaction $repo"
