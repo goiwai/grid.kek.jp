@@ -25,13 +25,16 @@ if test $is_mounted_grid_cern_ch -eq 0; then
 
         # if need be
     	export PERL5LIB=$PERL5LIB:$LCG_LOCATION/share/perl5
+
+        # KEKCC specific config for multiple tcp streams transfer
+        export GLOBUS_TCP_PORT_RANGE=20000,25000
     else
         echo "Not found: $cern_grid_setup" >&2
         unset_vars_once
         return 1
     fi
 else
-    echo "Not mounted: grid.cern.ch" >&2
+    echo "Not mounted: $repo_cern_grid" >&2
     unset_vars_once
     return 1
 fi
