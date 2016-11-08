@@ -1,4 +1,4 @@
-This is a repository of grid.kek.jp hosted on the Stratum-0 of cvmfs-stratum-zero.cc.kek.jp.
+This is a repository of `grid.kek.jp` hosted on the Stratum-0 of `cvmfs-stratum-zero.cc.kek.jp`. This repository contains configuration files that 
 
 # Usage
 
@@ -52,10 +52,8 @@ Then commit and push like:
 
 ```
 git add .
-git commit .               # You need to leave the comment.
+git commit .               # You may leave the comment.
 git push origin virtorg
 ```
 
-Your `git` doesn't accept a sub command `pull-request` since `pull-request` is a _github proprietary function_. Instead, you can send a pull-request via the browser.
-
-Visit https://github.com/goiwai/grid.kek.jp/tree/virtorg and find the word "Pull request" on the top-right of file list table, and then click it. That's it!
+In case of that your `git` doesn't accept a sub command `pull-request` since `pull-request` is a **github proprietary** function, you may send a pull-request via the browser instead. Visit https://github.com/goiwai/grid.kek.jp/tree/virtorg and find the word "Pull request" on the top-right of file list, and then click it. That's it!
