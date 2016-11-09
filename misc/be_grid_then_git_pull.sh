@@ -20,8 +20,8 @@ if test $? -eq 0; then
         sudo -i -u $to_user /bin/sh -c "cvmfs_server transaction $repo && cd $git_dir && git pull"
         if test $? -ne 0; then
             echo "Fatal: encountered a fatal error while transaction..." >&2
-	    fuser -va $cvmfs_dir /var/spool$cvmfs_dir/rdonly >&2
-	    lsof | grep $repo >&2
+	    /sbin/fuser -va $cvmfs_dir /var/spool$cvmfs_dir/rdonly >&2
+	    /usr/sbin/lsof | grep $repo >&2
             sudo -i -u $to_user /bin/sh -c "cvmfs_server abort -f $repo" >&2
     	    cvmfs_server list >&2
     	    exit 1
@@ -30,8 +30,8 @@ if test $? -eq 0; then
         sudo -i -u $to_user /bin/sh -c "cvmfs_server publish $repo"
         if test $? -ne 0; then
             echo "Fatal: encountered a fatal error while publishing..." >&2
-	    fuser -va $cvmfs_dir /var/spool$cvmfs_dir/rdonly >&2
-	    lsof | grep $repo >&2
+	    /sbin/fuser -va $cvmfs_dir /var/spool$cvmfs_dir/rdonly >&2
+	    /usr/sbin/lsof | grep $repo >&2
             sudo -i -u $to_user /bin/sh -c "cvmfs_server abort -f $repo" >&2
             cvmfs_server list >&2
             exit 1
