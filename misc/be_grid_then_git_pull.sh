@@ -1,4 +1,7 @@
 #! /bin/sh
+# - Don't execute this file directly like: `$ /cvmfs/grid.kek.jp/misc/be_grid_then_git_pull.sh`.
+# - Don't execute a symbolic link to `/cvmfs/grid.kek.jp/misc/be_grid_then_git_pull.sh`.
+# See a [`README.md`](README.md) for a bit more detail.
 script_name=$(basename $0)
 script_dir=$(cd $(dirname $0) && pwd)
 dir_at_exec=$(cd . && pwd)
