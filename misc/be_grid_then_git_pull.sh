@@ -30,13 +30,13 @@ cvmfs_server list | grep -q "^$repo.*stratum0.*local.*$"
 if test $? -eq 0; then
     cd $git_dir && git remote show origin | tail -n 1 | grep -q 'out of date'
     if test $? -eq 0; then # out of date, hence to be updated
-        sudo -u $to_user /bin/sh -c "cvmfs_server transaction $repo && cd $git_dir && git pull"
+        sudo -i -u $to_user /bin/sh -c "cvmfs_server transaction $repo && cd $git_dir && git pull"
         if test $? -ne 0; then
             echo "Fatal: encountered a fatal error while transaction..." >&2
     	    cvmfs_server list >&2
     	    exit 1
     	fi
-        sudo -u $to_user /bin/sh -c "cvmfs_server publish $repo"
+        sudo -i -u $to_user /bin/sh -c "cvmfs_server publish $repo"
         if test $? -ne 0; then
             echo "Fatal: encountered a fatal error while publishing..." >&2
             cvmfs_server list >&2
