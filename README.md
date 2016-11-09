@@ -1,6 +1,5 @@
 This is a repository of `grid.kek.jp` hosted on the Stratum-0 of `cvmfs-stratum-zero.cc.kek.jp`. This repository contains configuration files that 
 
-
 # Usage
 
 To see supported VOs, use the [`show_supported_vo.sh`](show_supported_vo.sh). This will show you supported VOs like:
