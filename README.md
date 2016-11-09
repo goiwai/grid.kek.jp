@@ -3,9 +3,10 @@ This is a repository of `grid.kek.jp` hosted on the Stratum-0 of `cvmfs-stratum-
 
 # Usage
 
-To see supported VOs, use the [`show_supported_vo.sh`](show_supported_vo.sh). This will show you supported VOs like:
+To see supported VOs, use the [`show_supported_vo.sh`](misc/show_supported_vo.sh). This will show you supported VOs like:
 
 ```
+cd misc
 ./show_supported_vo.sh
 cdfj
 g4med
