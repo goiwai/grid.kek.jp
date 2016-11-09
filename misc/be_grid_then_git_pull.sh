@@ -14,6 +14,7 @@
 # Fatal: encountered a fatal error while transaction...
 # belle.kek.jp (stratum0 / local)  
 # grid.kek.jp (stratum0 / local - in transaction)  
+#
 
 script_name=$(basename $0)
 script_dir=$(cd $(dirname $0) && pwd)
