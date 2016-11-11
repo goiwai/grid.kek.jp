@@ -1,3 +1,5 @@
+-t and -t for pseudo-tty
+
 This is a repository of `grid.kek.jp` hosted on the Stratum-0 of `cvmfs-stratum-zero.cc.kek.jp`. This repository contains configuration files that 
 
 
