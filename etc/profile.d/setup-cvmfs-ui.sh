@@ -1,22 +1,28 @@
-cvmfs_root_dir=/cvmfs
-repo_cern_grid=grid.cern.ch
-repo_kek_grid=grid.kek.jp
-cern_grid_setup=$cvmfs_root_dir/$repo_cern_grid/etc/profile.d/setup-cvmfs-ui.sh
-cvmfs_config status | grep -q "$repo_cern_grid"
-is_mounted_grid_cern_ch=$?
+# cvmfs_root_dir=/cvmfs
+script_dir=$(cd $(dirname $0) && pwd)
+fqrn_ch_cern_grid=grid.cern.ch
+fqrn_jp_kek_grid=grid.kek.jp
+# cern_grid_setup=$cvmfs_root_dir/$repo_cern_grid/etc/profile.d/setup-cvmfs-ui.sh
+
 
 function unset_vars_once() {
-    unset cvmfs_root_dir repo_cern_grid repo_kek_grid cern_grid_setup is_mounted_grid_cern_ch
+    unset script_dir fqrn_ch_cern_grid fqrn_jp_kek_grid mount_dir_cern cern_grid_setup is_mounted_grid_cern_ch
     unset unset_vars_once
 }
 
+cvmfs_config status | grep -q "$fqrn_ch_cern_grid"
+is_mounted_grid_cern_ch=$?
+
 if test $is_mounted_grid_cern_ch -eq 0; then
+    mount_dir_cern=$(cvmfs_config status | grep "$fqrn_ch_cern_grid" | awk '{print $4}')
+    cern_grid_setup=$mount_dir_cern/etc/profile.d/setup-cvmfs-ui.sh
+
     if test -f $cern_grid_setup; then
         . $cern_grid_setup
 
         # overwride some variables
-    	export X509_VOMS_DIR=$cvmfs_root_dir/$repo_kek_grid/etc/grid-security/vomsdir
-    	export VOMS_USERCONF=$cvmfs_root_dir/$repo_kek_grid/etc/grid-security/vomses
+    	export X509_VOMS_DIR=$(cd $script_dir/.. && pwd)/grid-security/vomsdir
+    	export VOMS_USERCONF=$(cd $script_dir/.. && pwd)/grid-security/vomses
         # site specific (with default)
         # set these too someting more appropriate to your site/region
     	# export MYPROXY_SERVER=myproxy.cern.ch
@@ -34,7 +40,7 @@ if test $is_mounted_grid_cern_ch -eq 0; then
         return 1
     fi
 else
-    echo "Not mounted: $repo_cern_grid" >&2
+    echo "Not mounted: $fqrn_ch_cern_grid" >&2
     unset_vars_once
     return 1
 fi
