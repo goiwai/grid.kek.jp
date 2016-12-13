@@ -1,5 +1,5 @@
 # cvmfs_root_dir=/cvmfs
-script_dir=$(cd $(dirname $0) && pwd)
+script_dir=$(cd $(dirname $BASH_SOURCE:-$0) && pwd)
 fqrn_ch_cern_grid=grid.cern.ch
 fqrn_jp_kek_grid=grid.kek.jp
 # cern_grid_setup=$cvmfs_root_dir/$repo_cern_grid/etc/profile.d/setup-cvmfs-ui.sh
